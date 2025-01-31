@@ -1,6 +1,6 @@
 "use client";
 
-import { useCartStore } from "@/lib/store/cart";
+import { useCartStore } from "@/lib/store/card";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Printer } from "lucide-react";
