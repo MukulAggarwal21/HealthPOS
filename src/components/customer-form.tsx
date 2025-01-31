@@ -30,7 +30,7 @@ export const CustomerForm = ({ onBack, onNext }: CustomerFormProps) => {
   };
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="max-w-xl mx-auto ">
       <Card>
         <CardHeader>
           <CardTitle>Customer Information</CardTitle>
