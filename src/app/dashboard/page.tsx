@@ -2,18 +2,17 @@
 import { Dashboard } from "@/components/dashboard";
 import { AnalyticsDashboard } from "@/components/analytics/dashboard";
 import { useCurrency } from "@/lib/providers/currency-provider";
-import { Locale } from '@/lib/i18n/navigation';
 import { CurrencyProvider } from "@/lib/providers/currency-provider";
 
 import { SalesChart } from "@/components/analytics/sales-chart";
-interface Props {
-  params: {
-    locale: Locale;
-  };
-}
+// interface Props {
+//   params: {
+//     locale: Locale;
+//   };
+// }
 
 
-export default function DashboardPage({ params: { locale } }: Props) {
+export default function DashboardPage() {
   const analyticsData = {
     totalRevenue: 15000,
     servicesSold: 200,

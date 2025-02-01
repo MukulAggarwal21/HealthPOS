@@ -8,6 +8,8 @@ import { Receipt } from "./receipt";
 import { PaymentForm } from "./payment-form";
 import { AnalyticsDashboard } from "@/components/analytics/dashboard";
 import { SalesChart } from "@/components/analytics/sales-chart";
+import type { DashboardProps } from "@/types";
+
 
 export const Dashboard = ({ analyticsData }: DashboardProps) => {
   const [step, setStep] = useState<"services" | "customer" | "payment" | "receipt">(
