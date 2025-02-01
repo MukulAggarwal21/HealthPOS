@@ -25,7 +25,6 @@ export const CustomerForm = ({ onBack, onNext }: CustomerFormProps) => {
   });
 
   const onSubmit = (data: z.infer<typeof customerSchema>) => {
-    // Save customer data and proceed
     onNext();
   };
 

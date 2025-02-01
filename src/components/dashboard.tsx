@@ -6,7 +6,9 @@ import { Cart } from "./cart";
 import { CustomerForm } from "./customer-form";
 import { Receipt } from "./receipt";
 import { PaymentForm } from "./payment-form";
-export const Dashboard = () => {
+import { AnalyticsDashboard } from "@/components/analytics/dashboard";
+
+export const Dashboard = ({ analyticsData }: DashboardProps) => {
   const [step, setStep] = useState<"services" | "customer" | "payment" | "receipt">(
     "services"
   );
@@ -19,14 +21,21 @@ export const Dashboard = () => {
         </header>
         
         {step === "services" && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2">
-              <ServiceList />
+           <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="md:col-span-2">
+                <ServiceList />
+              </div>
+              <div className="md:col-span-1">
+                <Cart onCheckout={() => setStep("customer")} />
+              </div>
             </div>
-            <div className="md:col-span-1">
-              <Cart onCheckout={() => setStep("customer")} />
+            
+            <div className="mb-8 items-center mt-14">
+              <h2 className="text-2xl font-bold mb-4">Business Analytics</h2>
+              <AnalyticsDashboard data={analyticsData} />
             </div>
-          </div>
+          </>
         )}
         
         {step === "customer" && (

@@ -20,7 +20,6 @@ const transactions = [
     total: 150.0,
     status: "completed",
   },
-  // Add more sample transactions...
 ];
 
 export function TransactionHistory() {

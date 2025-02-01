@@ -1,0 +1,12 @@
+{
+  "Analytics": {
+    "totalRevenue": "Total Revenue",
+    "servicesSold": "Services Sold",
+    "topServices": "Top Services"
+  },
+  "Currencies": {
+    "USD": "US Dollar",
+    "EUR": "Euro",
+    "GBP": "British Pound"
+  }
+}

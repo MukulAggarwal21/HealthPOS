@@ -1,6 +1,7 @@
+
 "use client";
 
-import { useCartStore } from "@/lib/store/card";
+import { useCartStore } from "@/lib/store/cart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -14,54 +15,43 @@ export const Cart = ({ onCheckout }: CartProps) => {
   const { items, removeItem, total } = useCartStore();
 
   return (
-    <Card className="h-[calc(100vh-12rem)]">
-      <CardHeader>
-        <CardTitle>Cart</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[calc(100vh-24rem)]">
-          <div className="space-y-4">
-            {items.map((item) => (
-              <div
-                key={item.id}
-                className="flex justify-between items-start p-4 bg-muted rounded-lg"
-              >
-                <div>
-                  <h4 className="font-medium">{item.name}</h4>
-                  <p className="text-sm text-muted-foreground">
-                    ${item.price.toFixed(2)}
-                  </p>
-                </div>
-                <Button
+    <div className="p-4 border rounded-lg shadow-lg">
+      <h2 className="text-xl font-semibold mb-4">Cart</h2>
+      <ScrollArea className="h-60">
+        {items.map((item) => (
+          <Card key={item.id} className="mb-2 ">
+            <CardContent className="flex justify-between items-center pt-3 pb-[-2]">
+              <div>
+                <p className="font-medium ">{item.name}</p>
+                <p className="text-sm text-gray-500">
+                  ${item.price.toFixed(2)} × {item.quantity}
+                </p>
+              </div>
+  
+              
+
+   <Button
                   variant="ghost"
                   size="icon"
                   onClick={() => removeItem(item.id)}
                 >
                   <X className="h-4 w-4" />
                 </Button>
-              </div>
-            ))}
-            {items.length === 0 && (
-              <p className="text-center text-muted-foreground">
-                No items in cart
-              </p>
-            )}
-          </div>
-        </ScrollArea>
-      </CardContent>
-      <CardFooter className="flex flex-col gap-4">
-        <div className="flex justify-between w-full">
-          <span className="font-semibold">Total:</span>
-          <span className="font-semibold">${total.toFixed(2)}</span>
-        </div>
-        <Button
-          className="w-full"
-          disabled={items.length === 0}
-          onClick={onCheckout}
-        >
-          Proceed to Checkout
-        </Button>
-      </CardFooter>
-    </Card>
+
+            </CardContent>
+          </Card>
+        ))}
+        {items.length === 0 && <p className="text-center text-gray-500">No items in cart</p>}
+      </ScrollArea>
+
+      <div className="mt-4 flex justify-between items-center font-semibold">
+        <span>Total:</span>
+        <span>${total.toFixed(2)}</span>
+      </div>
+
+      <Button className="w-full mt-4" onClick={onCheckout} disabled={items.length === 0}>
+        Proceed to Checkout
+      </Button>
+    </div>
   );
 };

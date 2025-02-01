@@ -1,3 +1,5 @@
+
+
 import { create } from "zustand";
 import { Service } from '@/types';
 
@@ -16,11 +18,21 @@ export const useCartStore = create<CartStore>((set, get) => ({
       items: [...state.items, service],
       total: get().total + service.price,
     })),
-  removeItem: (serviceId) =>
-    set((state) => ({
-      items: state.items.filter((item) => item.id !== serviceId),
-      total: get().total - state.items.find(item => item.id === serviceId)?.price || 0,
-    })),
+
+  removeItem: (serviceId) => 
+    set((state) => {
+      const itemIndex = state.items.findIndex(item => item.id === serviceId);
+      if (itemIndex === -1) return state; 
+
+      const updatedItems = [...state.items];
+      const removedItem = updatedItems.splice(itemIndex, 1)[0]; 
+
+      return {
+        items: updatedItems,
+        total: get().total - removedItem.price, 
+      };
+    }),
+
   clearCart: () => set({ items: [], total: 0 }),
   total: 0,
 }));

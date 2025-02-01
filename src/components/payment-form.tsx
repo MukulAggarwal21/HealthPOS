@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCartStore } from "@/lib/store/card";
+import { useCartStore } from "@/lib/store/cart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 const paymentSchema = z.object({
-  cardNumber: z.string().regex(/^\d{16}$/, "Invalid card number"),
+  cardNumber: z.string().regex(/^(?:\d{4} ?){3}\d{4}$/ , "Invalid card number"),
   expiryDate: z.string().regex(/^(0[1-9]|1[0-2])\/([0-9]{2})$/, "Invalid expiry date"),
   cvv: z.string().regex(/^\d{3,4}$/, "Invalid CVV"),
   cardholderName: z.string().min(2, "Invalid cardholder name"),
@@ -33,7 +33,6 @@ export const PaymentForm = ({ onBack, onSuccess }: PaymentFormProps) => {
   const onSubmit = async (data: z.infer<typeof paymentSchema>) => {
     setLoading(true);
     try {
-      // Simulate payment processing
       await new Promise(resolve => setTimeout(resolve, 2000));
       onSuccess();
     } catch (error) {
@@ -42,7 +41,14 @@ export const PaymentForm = ({ onBack, onSuccess }: PaymentFormProps) => {
       setLoading(false);
     }
   };
-
+const formatCardNumber = (value: string | undefined) => {
+    if (!value) return "";
+  return value
+    .replace(/\D/g, "") 
+    .slice(0, 16) 
+    .replace(/(\d{4})/g, "$1 ") 
+    .trim();
+};
   return (
     <Card>
       <CardHeader>
@@ -63,22 +69,31 @@ export const PaymentForm = ({ onBack, onSuccess }: PaymentFormProps) => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="cardNumber"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Card Number</FormLabel>
-                  <FormControl>
-                    <Input 
-                      {...field} 
-                      placeholder="4111 1111 1111 1111"
-                      maxLength={16}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+           
+
+
+
+<FormField
+  control={form.control}
+  name="cardNumber"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Card Number</FormLabel>
+      <FormControl>
+        <Input
+          {...field}
+          placeholder="4111 1111 1111 1111"
+          maxLength={19} 
+          value={formatCardNumber(field.value)}
+          onChange={(e) => field.onChange(formatCardNumber(e.target.value))}
+        />
+      </FormControl>
+    </FormItem>
+  )}
+/>
+
+
+
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
