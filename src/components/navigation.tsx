@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navigation = [
   { name: "Dashboard", href: "/" },
@@ -15,33 +15,31 @@ export function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="hidden font-bold sm:inline-block">
-              Modern POS
-            </span>
+    <nav className="border-b">
+      <div className="flex h-16 items-center px-4">
+        <div className="flex items-center space-x-4">
+          <Link href="/" className="text-xl font-bold">
+            Modern POS
           </Link>
-          <nav className="flex items-center space-x-6 text-sm font-medium">
+          <div className="flex space-x-4">
             {navigation.map((item) => (
               <Link
-                key={item.href}
+                key={item.name}
                 href={item.href}
                 className={cn(
-                  "transition-colors hover:text-foreground/80",
+                  "text-sm font-medium transition-colors hover:text-primary",
                   pathname === item.href
-                    ? "text-foreground"
-                    : "text-foreground/60"
+                    ? "text-black dark:text-white"
+                    : "text-muted-foreground"
                 )}
               >
                 {item.name}
               </Link>
             ))}
-          </nav>
+          </div>
         </div>
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <ThemeToggle/>
+        <div className="ml-auto">
+          <ThemeToggle />
         </div>
       </div>
     </nav>

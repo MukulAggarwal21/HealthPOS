@@ -5,13 +5,6 @@ import { useCurrency } from "@/lib/providers/currency-provider";
 import { CurrencyProvider } from "@/lib/providers/currency-provider";
 
 import { SalesChart } from "@/components/analytics/sales-chart";
-// interface Props {
-//   params: {
-//     locale: Locale;
-//   };
-// }
-
-
 export default function DashboardPage() {
   const analyticsData = {
     totalRevenue: 15000,
