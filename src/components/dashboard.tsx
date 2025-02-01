@@ -7,6 +7,7 @@ import { CustomerForm } from "./customer-form";
 import { Receipt } from "./receipt";
 import { PaymentForm } from "./payment-form";
 import { AnalyticsDashboard } from "@/components/analytics/dashboard";
+import { SalesChart } from "@/components/analytics/sales-chart";
 
 export const Dashboard = ({ analyticsData }: DashboardProps) => {
   const [step, setStep] = useState<"services" | "customer" | "payment" | "receipt">(
@@ -34,6 +35,10 @@ export const Dashboard = ({ analyticsData }: DashboardProps) => {
             <div className="mb-8 items-center mt-14">
               <h2 className="text-2xl font-bold mb-4">Business Analytics</h2>
               <AnalyticsDashboard data={analyticsData} />
+            </div>
+
+             <div className="pt-4 px-10 pb-9">
+              <SalesChart />
             </div>
           </>
         )}

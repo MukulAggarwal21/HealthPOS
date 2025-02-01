@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, useContext, useState } from 'react'
 
-type Currency = 'USD' | 'EUR' | 'GBP'
+type Currency = 'USD' | 'EUR' | 'GBP' |'INR'
 type CurrencyContextType = {
   currency: Currency
   setCurrency: (currency: Currency) => void
@@ -10,8 +10,9 @@ type CurrencyContextType = {
 
 const EXCHANGE_RATES = {
   USD: 1,
-  EUR: 0.92,
-  GBP: 0.79
+  EUR: 0.96,
+  GBP: 0.80,
+  INR: 86.51
 }
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined)

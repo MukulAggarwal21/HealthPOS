@@ -6,6 +6,7 @@ import { useCartStore } from "@/lib/store/cart";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useCurrency } from "@/lib/providers/currency-provider";
 
 const SAMPLE_SERVICES: Service[] = [
 {
@@ -127,6 +128,16 @@ export const ServiceList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("Fitness");
   const { addItem } = useCartStore();
+const { currency, convertCurrency } = useCurrency();
+
+const formatPrice = (price: number) => {
+  const convertedPrice = convertCurrency(price, 'USD', currency);
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency,
+  }).format(convertedPrice);
+};
+
 
   const filteredServices = SAMPLE_SERVICES.filter(service => {
     const matchesSearch = service.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -161,6 +172,7 @@ export const ServiceList = () => {
         </div>
       </div>
 
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {filteredServices.map((service) => (
           <Card key={service.id}>
@@ -171,7 +183,7 @@ export const ServiceList = () => {
               <p className="text-muted-foreground">{service.description}</p>
               <div className="mt-2 flex justify-between items-center">
                 <span className="font-semibold">
-                  ${service.price.toFixed(2)}
+                   {formatPrice(service.price)}
                 </span>
                 <span className="text-sm text-muted-foreground">
                   {service.duration}

@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { useCurrency } from "@/lib/providers/currency-provider";
 
 const paymentSchema = z.object({
   cardNumber: z.string().regex(/^(?:\d{4} ?){3}\d{4}$/ , "Invalid card number"),
@@ -25,6 +26,7 @@ interface PaymentFormProps {
 export const PaymentForm = ({ onBack, onSuccess }: PaymentFormProps) => {
   const [loading, setLoading] = useState(false);
   const { total } = useCartStore();
+  const { currency, convertCurrency } = useCurrency();
 
   const form = useForm<z.infer<typeof paymentSchema>>({
     resolver: zodResolver(paymentSchema),
@@ -49,6 +51,17 @@ const formatCardNumber = (value: string | undefined) => {
     .replace(/(\d{4})/g, "$1 ") 
     .trim();
 };
+
+ const formatPrice = (price: number) => {
+    const convertedPrice = convertCurrency(price, 'USD', currency);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: currency,
+    }).format(convertedPrice);
+  };
+
+
+
   return (
     <Card>
       <CardHeader>
@@ -123,7 +136,7 @@ const formatCardNumber = (value: string | undefined) => {
             <div className="pt-4 border-t">
               <div className="flex justify-between mb-4">
                 <span className="font-semibold">Total Amount:</span>
-                <span className="font-semibold">${total.toFixed(2)}</span>
+                <span className="font-semibold">{formatPrice(total)}</span>
               </div>
               <div className="flex justify-between gap-4">
                 <Button type="button" variant="outline" onClick={onBack}>
