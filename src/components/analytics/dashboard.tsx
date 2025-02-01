@@ -10,7 +10,6 @@ import {
   ResponsiveContainer 
 } from "recharts"
 import { formatCurrency } from "@/lib/utils/format-currency"
-import { useTranslations } from 'next-intl'
 
 interface AnalyticsData {
   totalRevenue: number
@@ -19,13 +18,12 @@ interface AnalyticsData {
 }
 
 export const AnalyticsDashboard: React.FC<{ data: AnalyticsData }> = ({ data }) => {
-  const t = useTranslations('Analytics')
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       <Card>
         <CardHeader>
-          <CardTitle>{t('totalRevenue')}</CardTitle>
+          <CardTitle>{('totalRevenue')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
@@ -36,7 +34,7 @@ export const AnalyticsDashboard: React.FC<{ data: AnalyticsData }> = ({ data }) 
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('servicesSold')}</CardTitle>
+          <CardTitle>{('servicesSold')}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
@@ -47,7 +45,7 @@ export const AnalyticsDashboard: React.FC<{ data: AnalyticsData }> = ({ data }) 
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('topServices')}</CardTitle>
+          <CardTitle>{('topServices')}</CardTitle>
         </CardHeader>
         <CardContent>
           {data.topServices.map((service, index) => (

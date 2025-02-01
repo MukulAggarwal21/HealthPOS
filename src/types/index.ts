@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Service } from "@/types";
+import type { Service } from "@/types";
 
 interface CartStore {
   items: Service[];
@@ -8,6 +8,9 @@ interface CartStore {
   clearCart: () => void;
   total: number;
 }
+
+
+
 
 export const useCartStore = create<CartStore>((set, get) => ({
   items: [],

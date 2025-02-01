@@ -1,9 +1,6 @@
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from 'next-intl/server';
 import { CurrencyProvider } from "@/lib/providers/currency-provider";
-import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import { CurrencySelector } from "@/components/ui/currency-selector";
 import "./globals.css";
 
@@ -11,18 +8,18 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
   children,
-   params: { locale }
+  //  params: { locale }
 }: {
   children: React.ReactNode;
-    params: { locale: string };
+    // params: { locale: string };
 
 }) {
-    const messages = await getMessages();
+    // const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang="en">
       <body className={inter.className}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        {/* <NextIntlClientProvider locale={locale} messages={messages}>
           <CurrencyProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <div className="flex justify-end space-x-4 p-4">
@@ -32,7 +29,17 @@ export default async function RootLayout({
               {children}
             </ThemeProvider>
           </CurrencyProvider>
-        </NextIntlClientProvider>
+        </NextIntlClientProvider> */}
+
+        <CurrencyProvider>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="flex items-center justify-between px-4 p-10 py-3">
+  <h1 className="text-3xl font-bold  dark:text-white pr-4">HealthPOS</h1>
+  <CurrencySelector />
+</div>
+            {children}
+          </ThemeProvider>
+        </CurrencyProvider>
       </body>
     </html>
   );
