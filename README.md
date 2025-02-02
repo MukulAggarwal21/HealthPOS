@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HealthPOS
 
-## Getting Started
+HealthPOS is a modern, intuitive, and responsive Point of Sale (POS) interface designed for selling services such as fitness classes, therapy sessions, and workshops. The application provides a seamless user experience, enabling customers to select services, add them to a cart, manage their transactions, and complete a simulated checkout process.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Service Selection**: Browse and select from a list of available services.
+- **Cart Management**: Add, remove, and modify services in the cart.
+- **Customer Management**: Input customer details (name, email, phone) during checkout.
+- **Checkout and Payment Simulation**: Complete transactions with a mocked payment flow.
+- **Receipt Generation**: View transaction details upon successful checkout.
+- **Analytics Dashboard**: Insights on sales trends and revenue.
+- **Responsive UI**: Works seamlessly across web and mobile devices.
+
+## Tech Stack
+
+- **Framework**: Next.js
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Form Handling**: React Hook Form
+- **UI Components**: Radix UI, Framer Motion
+- **Charts & Analytics**: Recharts
+
+## Folder Structure
+
+```
+📦src
+ ┣ 📂app
+ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📂services
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┗ 📂transactions
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┣ 📂dashboard
+ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📜favicon.ico
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┣ 📜loading.tsx
+ ┃ ┗ 📜page.tsx
+ ┣ 📂components
+ ┃ ┣ 📂analytics
+ ┃ ┃ ┣ 📜analytics.tsx
+ ┃ ┃ ┣ 📜dashboard.tsx
+ ┃ ┃ ┗ 📜sales-chart.tsx
+ ┃ ┣ 📂transactions
+ ┃ ┃ ┗ 📜transaction-history.tsx
+ ┃ ┣ 📂ui
+ ┃ ┃ ┣ 📜button.tsx
+ ┃ ┃ ┣ 📜card.tsx
+ ┃ ┃ ┣ 📜currency-selector.tsx
+ ┃ ┃ ┣ 📜error-boundary.tsx
+ ┃ ┃ ┣ 📜form.tsx
+ ┃ ┃ ┣ 📜input.tsx
+ ┃ ┃ ┣ 📜label.tsx
+ ┃ ┃ ┣ 📜loading-spinner.tsx
+ ┃ ┃ ┣ 📜scroll-area.tsx
+ ┃ ┃ ┣ 📜select.tsx
+ ┃ ┃ ┣ 📜table.tsx
+ ┃ ┃ ┗ 📜theme-toggle.tsx
+ ┃ ┣ 📜cart.tsx
+ ┃ ┣ 📜customer-form.tsx
+ ┃ ┣ 📜dashboard.tsx
+ ┃ ┣ 📜navigation.tsx
+ ┃ ┣ 📜payment-form.tsx
+ ┃ ┣ 📜receipt.tsx
+ ┃ ┣ 📜service-list.tsx
+ ┃ ┣ 📜theme-provider.tsx
+ ┃ ┗ 📜theme-toggle.tsx
+ ┣ 📂lib
+ ┃ ┣ 📂providers
+ ┃ ┃ ┗ 📜currency-provider.tsx
+ ┃ ┣ 📂store
+ ┃ ┃ ┗ 📜cart.ts
+ ┃ ┣ 📂utils
+ ┃ ┃ ┣ 📜format-currency.ts
+ ┃ ┃ ┗ 📜local-storage.ts
+ ┃ ┗ 📜utils.ts
+ ┣ 📂types
+ ┃ ┗ 📜index.ts
+ ┗ 📜middleware.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup & Running the Project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Ensure you have the following installed on your system:
 
-## Learn More
+- **Node.js** (latest stable version recommended)
+- **npm** or **yarn** (package manager)
 
-To learn more about Next.js, take a look at the following resources:
+### Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/MukulAggarwal21/HealthPOS.git
+   cd healthpos
+   ```
+2. Install dependencies:
+   ```sh
+   npm install  # or yarn install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Running the Project
 
-## Deploy on Vercel
+- Start the development server:
+  ```sh
+  npm run dev  # or yarn dev
+  ```
+- Open your browser and navigate to:
+  ```
+  http://localhost:3000
+  ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Building for Production
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To build the project for production, run:
+
+```sh
+npm run build  # or yarn build
+```
+
+Start the production server:
+
+```sh
+npm start  # or yarn start
+```
+
+### Linting & Code Quality
+
+Run the following command to check for linting errors:
+
+```sh
+npm run lint  # or yarn lint
+```
+
+## Assumptions & Limitations
+
+- The payment process is simulated (no real payment integration).
+- The project focuses on frontend functionalities without backend processing.
+
+## Contributing
+
+Contributions are welcome! Feel free to fork the repository, create a new branch, and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Enjoy using **HealthPOS**! 🚀
+
